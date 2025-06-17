@@ -1,0 +1,249 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary: #14A097;
+  --secondary: #46b7AF;
+  --accent: #10DDC6;
+  --danger: #EF4444;
+  --neutral-50: #F9FAFB;
+  --neutral-100: #F3F4F6;
+  --neutral-200: #E5E7EB;
+  --neutral-300: #D1D5DB;
+  --neutral-400: #9CA3AF;
+  --neutral-500: #6B7280;
+  --neutral-900: #111827;
+  --background: var(--neutral-50);
+  --foreground: var(--neutral-900);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: var(--neutral-900);
+    --foreground: var(--neutral-50);
+  }
+}
+
+body {
+  color: var(--neutral-900);
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+
+/* Gradient background animation */
+.gradient-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to top, #14A097, #FFFFFF);
+  z-index: -1;
+}
+
+/* Dynamic bubble animation */
+@keyframes morphBubble {
+  0% {
+    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+  }
+  25% {
+    border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+  }
+  50% {
+    border-radius: 50% 60% 30% 70% / 30% 40% 70% 60%;
+  }
+  75% {
+    border-radius: 60% 40% 70% 30% / 70% 30% 50% 40%;
+  }
+  100% {
+    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+  }
+}
+
+/* Profile picture opposite animation */
+@keyframes morphProfilePicture {
+  0% {
+    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+  }
+  25% {
+    border-radius: 60% 40% 70% 30% / 70% 30% 50% 40%;
+  }
+  50% {
+    border-radius: 30% 40% 70% 60% / 70% 60% 30% 40%;
+  }
+  75% {
+    border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+  }
+  100% {
+    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+  }
+}
+
+.dynamic-bubble {
+  position: absolute;
+  background-color: #14A097;
+  opacity: 0.7;
+  z-index: 5;
+  animation: morphBubble 8s infinite ease-in-out;
+  display: none; /* Hidden by default, shown when conversation starts */
+}
+
+.dynamic-bubble.active {
+  display: block;
+}
+
+/* Button styles */
+.btn {
+  @apply rounded-full px-6 py-2 font-medium transition-all duration-200 flex items-center justify-center;
+}
+
+.btn-primary {
+  @apply bg-primary text-white hover:bg-opacity-90 focus:ring-2 focus:ring-primary focus:ring-opacity-50;
+}
+
+.btn-danger {
+  @apply bg-danger text-white hover:bg-opacity-90 focus:ring-2 focus:ring-danger focus:ring-opacity-50;
+}
+
+.btn-accent {
+  @apply bg-accent text-white hover:bg-opacity-90 focus:ring-2 focus:ring-accent focus:ring-opacity-50;
+}
+
+/* Card styles */
+.card {
+  @apply bg-white rounded-xl shadow-sm border border-neutral-200;
+}
+
+/* Input styles */
+.input {
+  @apply px-4 py-2 rounded-full border border-neutral-200 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-50 transition-all duration-200;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--neutral-100);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--neutral-300);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--neutral-400);
+}
+
+/* Animation for text appearance */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Custom utility classes */
+.bg-primary { background-color: var(--primary); }
+.bg-secondary { background-color: var(--secondary); }
+.bg-accent { background-color: var(--accent); }
+.bg-danger { background-color: var(--danger); }
+.text-primary { color: var(--primary); }
+.text-accent { color: var(--accent); }
+.text-danger { color: var(--danger); }
+
+/* Added helper classes for component positioning */
+.profile-image-container {
+  position: relative;
+  z-index: 10;
+  margin-bottom: 2rem;
+  margin-top: 2rem; /* Adjusted for better spacing */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.chat-interface-container {
+  position: relative;
+  z-index: 5;
+  width: 100%;
+  max-width: 32rem;
+  margin: 0 auto;
+  margin-top: auto; /* Push to bottom of flex container */
+}
+
+/* Fixed control buttons container to ensure buttons are always clickable */
+.control-buttons-container {
+  position: relative;
+  z-index: 20; /* Higher z-index to ensure buttons are above chat interface */
+  margin-top: 2rem; /* Increased spacing below profile picture */
+  margin-bottom: 2rem; /* Added spacing above chat interface */
+  display: flex;
+  flex-direction: column; /* Stack elements vertically */
+  align-items: center;
+  width: 100%;
+}
+
+/* Button row styling */
+.control-buttons-container .flex {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  width: 100%;
+  max-width: 24rem; /* Limit width on larger screens */
+}
+
+/* Limit transcript height when expanded */
+.transcript-expanded {
+  max-height: 50vh !important; /* Limit height to 50% of viewport height */
+  overflow-y: auto;
+}
+
+/* Header styling */
+.header-container {
+  background-color: transparent;
+  color: var(--neutral-900);
+  border-bottom: 1px solid rgba(20, 160, 151, 0.2);
+  position: relative;
+  z-index: 10;
+}
+
+/* Footer styling */
+.footer-container {
+  background-color: transparent;
+  color: var(--neutral-900);
+  border-top: 1px solid rgba(20, 160, 151, 0.2);
+  position: relative;
+  z-index: 10;
+}
+
+/* Button styling for new color scheme */
+.primary-button {
+  background-color: var(--primary);
+  color: white;
+}
+
+.secondary-button {
+  background-color: var(--secondary);
+  color: white;
+}
+
+.pause-button {
+  background-color: var(--accent);
+  color: white;
+}
+
+.restart-button {
+  background-color: var(--danger);
+  color: white;
+}
