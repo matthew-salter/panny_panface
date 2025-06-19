@@ -1,0 +1,165 @@
+.profile-image-container {
+  position: relative;
+  z-index: 10;
+  margin-bottom: 2rem;
+  margin-top: 2rem; /* Adjusted for better spacing */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Mobile-specific adjustments to move profile picture and hue up */
+@media (max-width: 640px) {
+  .profile-image-container {
+    margin-top: 0; /* Remove top margin on mobile */
+  }
+}
+
+/* Perfect circle styling for profile image */
+.profile-image-container img {
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 50%; /* Ensures perfect circle */
+  overflow: hidden;
+}
+
+/* Increased spacing for control buttons - moved further down from profile picture */
+.control-buttons-container {
+  position: relative;
+  z-index: 20;
+  margin-top: 4rem; /* Increased from 2rem to move buttons further down */
+  margin-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+/* Enhanced animation for more active and less repetitive morphing */
+@keyframes enhancedMorphBubble {
+  0% {
+    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  20% {
+    border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+    transform: translate(-50%, -50%) rotate(5deg);
+  }
+  40% {
+    border-radius: 40% 70% 50% 30% / 30% 40% 70% 60%;
+    transform: translate(-50%, -50%) rotate(10deg);
+  }
+  60% {
+    border-radius: 60% 30% 40% 70% / 70% 50% 30% 40%;
+    transform: translate(-50%, -50%) rotate(5deg);
+  }
+  80% {
+    border-radius: 50% 60% 70% 40% / 40% 60% 50% 70%;
+    transform: translate(-50%, -50%) rotate(-5deg);
+  }
+  100% {
+    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+}
+
+/* Ensure the dynamic bubble is also perfectly circular when not morphing */
+.dynamic-bubble {
+  position: absolute;
+  background-color: #14A097;
+  opacity: 0.7;
+  z-index: 5;
+  animation: enhancedMorphBubble 6s infinite ease-in-out; /* Faster animation (6s instead of 8s) with enhanced keyframes */
+  display: none; /* Hidden by default, shown when conversation starts */
+  border-radius: 50%; /* Base shape is a perfect circle */
+}
+
+/* Mobile-specific adjustments for the dynamic bubble (hue) */
+@media (max-width: 640px) {
+  .dynamic-bubble {
+    top: 45% !important; /* Move the bubble up slightly on mobile */
+  }
+}
+
+/* Chat overlay styling - expands upward with white background */
+.transcript-expanded {
+  position: absolute !important;
+  bottom: 100%; /* Position above the input bar */
+  left: 0;
+  right: 0;
+  max-height: 50vh !important;
+  overflow-y: auto;
+  margin-bottom: 0.5rem; /* Small gap between overlay and input */
+  box-shadow: 0 -4px 6px -1px rgba(0, 0, 0, 0.1), 0 -2px 4px -1px rgba(0, 0, 0, 0.06);
+  z-index: 30; /* Ensure it appears above other elements */
+  background-color: white !important; /* Explicitly set white background */
+}
+
+/* Container for chat interface needs relative positioning for absolute overlay */
+.chat-interface-container {
+  position: relative;
+  z-index: 25; /* Higher than other elements but lower than the transcript when expanded */
+  width: 100%;
+  max-width: 32rem;
+  margin: 0 auto;
+  margin-top: auto; /* Push to bottom of flex container */
+}
+
+/* White copyright text in footer */
+.footer-container {
+  background-color: transparent;
+  color: white !important; /* Changed from var(--neutral-900) to white */
+  border-top: 1px solid rgba(20, 160, 151, 0.2);
+  position: relative;
+  z-index: 10;
+}
+
+/* Ensure all text in footer is white */
+.footer-container p {
+  color: white !important;
+}
+
+/* Mobile responsiveness for button container */
+@media (max-width: 640px) {
+  .flex.gap-4.justify-center.mb-4 {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .flex.gap-4.justify-center.mb-4 button {
+    width: 100%;
+  }
+}
+
+/* Standardized button styles for all action buttons */
+.standard-button {
+  transition: all 0.2s ease-in-out;
+  background-color: #3b82f6; /* blue-500 */
+  color: white;
+}
+
+.standard-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background-color: #2563eb; /* blue-600 */
+}
+
+.standard-button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Keep end-conversation-button for backward compatibility */
+.end-conversation-button {
+  transition: all 0.2s ease-in-out;
+}
+
+.end-conversation-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.end-conversation-button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
